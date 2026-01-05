@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Clasament Live 🏆</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #e3f2fd; text-align: center; padding: 50px; }
+        .board { background: white; max-width: 500px; margin: 0 auto; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        h1 { color: #1565c0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background-color: #2196f3; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        .btn-back { display: inline-block; margin-top: 20px; text-decoration: none; color: #1565c0; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="board">
+    <h1>🏆 Top Jucători</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Loc</th>
+                <th>Nume</th>
+                <th>Puncte</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jucator in jucatori %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ jucator[0] }}</td> <td>{{ jucator[1] }}</td> </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/" class="btn-back">⬅️ Înapoi la Start</a>
+</div>
+
+</body>
+</html>

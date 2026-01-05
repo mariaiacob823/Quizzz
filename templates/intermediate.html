@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Clasament Live</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="quiz-container">
+
+    <div class="game-box" style="border-top: 5px solid {% if 'Bravo' in status %}#43a047{% else %}#e53935{% endif %};">
+        <h2 style="color: {% if 'Bravo' in status %}#2e7d32{% else %}#c62828{% endif %}; margin:0;">
+            {{ status }}
+        </h2>
+    </div>
+
+    <div class="game-box">
+        <h3>📊 Top Jucători Acum</h3>
+
+        <div style="margin-top: 20px;">
+            {% for jucator in clasament %}
+                <div class="rank-row {% if loop.index == 1 %}rank-1{% endif %}"
+                     style="{% if jucator[0] == session['username'] %}background: #e3f2fd; border-color: #2196f3;{% endif %}">
+
+                    <span>
+                        <span style="display:inline-block; width:25px; color:#777;">#{{ loop.index }}</span>
+                        {{ jucator[0] }}
+                    </span>
+                    <span style="background: white; padding: 2px 8px; border-radius: 4px; border: 1px solid #ddd;">
+                        {{ jucator[1] }} pct
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <br>
+        {% if is_final %}
+            <a href="/result" class="game-btn btn-yellow">🏆 Vezi Câștigătorul Final!</a>
+        {% else %}
+            <a href="/quiz/{{ next_id }}" class="game-btn">Următoarea Întrebare ➡️</a>
+        {% endif %}
+    </div>
+
+</div>
+
+{% if 'Bravo' in status %}
+    <audio autoplay><source src="{{ url_for('static', filename='win.mp3') }}" type="audio/mpeg"></audio>
+{% else %}
+    <audio autoplay><source src="{{ url_for('static', filename='fail.mp3') }}" type="audio/mpeg"></audio>
+{% endif %}
+
+</body>
+</html>

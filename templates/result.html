@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezultat Final</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="quiz-container">
+
+    <div class="game-box" style="background: #fffde7; border-color: #fbc02d; border-width: 4px;">
+        <div style="font-size: 4rem; margin-bottom: 0;">🏆</div>
+        <h1 style="color: #f57f17; font-size: 2.5rem; margin-bottom: 10px;">CAMPIONUL</h1>
+
+        {% if winner %}
+            <h2 style="font-size: 3rem; color: #333; margin: 10px 0;">{{ winner[0] }}</h2>
+            <div class="player-tag" style="font-size: 1.5rem; background: white; border-color: #fbc02d;">
+                Scor Total: {{ winner[1] }} puncte
+            </div>
+        {% else %}
+            <p>Nimeni nu a jucat.</p>
+        {% endif %}
+    </div>
+
+    <div class="game-box">
+        <h3>Top 10 Final</h3>
+        {% for jucator in clasament %}
+            {% if loop.index > 1 %}
+                <div class="rank-row">
+                    <span>#{{ loop.index }} {{ jucator[0] }}</span>
+                    <span>{{ jucator[1] }} pct</span>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <br><br>
+        <a href="/" class="game-btn btn-red">🔄 Joc Nou</a>
+    </div>
+
+</div>
+
+<audio autoplay><source src="{{ url_for('static', filename='win.mp3') }}" type="audio/mpeg"></audio>
+
+</body>
+</html>

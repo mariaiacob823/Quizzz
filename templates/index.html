@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Start Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="quiz-container">
+
+    <div class="game-box">
+        <h1>Quiz General</h1>
+        <p>Introduceți numele pentru a intra în joc.</p>
+
+        <form action="/inregistrare" method="POST" style="margin-top: 20px;">
+            <input type="text" name="username" placeholder="Numele tău..." required autocomplete="off">
+            <button type="submit" class="game-btn btn-green">Conectare</button>
+        </form>
+    </div>
+
+    <div class="game-box" style="margin-top: 40px; border-color: #ffe0b2;">
+        <h3>Panou Admin</h3>
+
+        <a href="/reset" class="game-btn btn-red" style="font-size: 1rem; padding: 12px; width: auto; display: inline-block;">Resetare Joc</a>
+
+        <form action="/admin_start" method="POST" style="margin-top: 20px;">
+            <select name="domeniu">
+                <option value="Mix">Mix General</option>
+                <option value="Geografie">Geografie</option>
+                <option value="Istorie">Istorie</option>
+                <option value="Divertisment">Divertisment</option>
+                <option value="Sport">Sport</option>
+                <option value="Stiinta">Știință</option>
+            </select>
+            <button type="submit" class="game-btn btn-yellow">Start Joc</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

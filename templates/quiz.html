@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="quiz-container">
+
+    <div class="timer-display" style="color: #333; margin-bottom: 5px;">
+        TIMP: <span id="time-text" style="font-weight: bold; color: #d32f2f;">15</span>s
+    </div>
+
+    <div class="timer-container">
+        <div class="timer-fill"></div>
+    </div>
+
+    <div class="game-box">
+        <div style="font-size: 0.9rem; color: #777; margin-bottom: 10px; font-weight: bold;">
+            Întrebarea {{ nr + 1 }} din {{ total }}
+        </div>
+
+        <h2 style="font-size: 1.6rem; color: #333; margin-top: 0;">{{ q.text }}</h2>
+    </div>
+
+    <form id="quizForm" action="/quiz/{{ nr + 1 }}" method="POST" class="options-grid">
+        {% set letters = ['A', 'B', 'C', 'D'] %}
+        {% for opt in q.optiuni %}
+            <button type="submit" name="answer" value="{{ opt }}" class="quiz-btn">
+                <span class="btn-letter">{{ letters[loop.index0] }}</span>
+                <span class="btn-text">{{ opt }}</span>
+            </button>
+        {% endfor %}
+        <input type="hidden" name="answer" value="TIMP_EXPIRAT">
+    </form>
+
+</div>
+
+<script>
+    var secunde = 15;
+    var textTimp = document.getElementById("time-text");
+
+    // Scriptul care numără secundele text
+    var interval = setInterval(function() {
+        secunde--;
+        textTimp.innerHTML = secunde;
+
+        if (secunde <= 0) {
+            clearInterval(interval);
+            document.getElementById("quizForm").submit();
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
